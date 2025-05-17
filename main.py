@@ -20,8 +20,8 @@ class App(customtkinter.CTk):
 
         self.grid_frame = customtkinter.CTkFrame(self)
 
-        self.rows = 10
-        self.cols = 10
+        self.rows = 20
+        self.cols = 20
         self.buttons = []
 
         for r in range(self.rows):
