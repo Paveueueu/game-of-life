@@ -25,22 +25,27 @@ def count_neighbors(cell, toggled_cells):
 
 
 
-def step(toggled_cells: set[tuple[int, int]]):
+def step(toggled_cells: set[tuple[int, int]], rules: tuple[list[int], list[int]]):
     result_cells = set()
     neighbors = {
         cell: count_neighbors(cell, toggled_cells)
         for cell in toggled_cells
     }
 
-    for cell in toggled_cells:
-        for offset in OFFSETS:
-            nb = (cell[0] + offset[0], cell[1] + offset[1])
-            if nb not in toggled_cells:
-                if nb not in result_cells:
-                    if count_neighbors(nb, toggled_cells) == 3:
-                        result_cells.add(nb)
+    rules_live = rules[0]
+    rules_die = rules[1]
 
-            if neighbors[cell] == 3 or neighbors[cell] == 2:
+    for cell in toggled_cells:
+        for neighbor in [(cell[0] + offset[0], cell[1] + offset[1]) for offset in OFFSETS]:
+            # if a neighbor is dead & not to be alive next turn, toggle him alive (according to the rules)
+            if neighbor not in toggled_cells:
+                if neighbor not in result_cells:
+                    count = count_neighbors(neighbor, toggled_cells) # neighbors of the neighbor
+                    if count in rules_live:
+                        result_cells.add(neighbor)
+
+            # if cell is not supposed to die, toggle him alive next turn
+            if neighbors[cell] not in rules_die:
                 result_cells.add(cell)
 
     return result_cells

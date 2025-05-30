@@ -1,7 +1,7 @@
 import customtkinter
 
 class ClickableGridFrame(customtkinter.CTkFrame):
-    def __init__(self, master, rows=2, columns=2, **kwargs):
+    def __init__(self, master, grid_offset, rows, columns, **kwargs):
         super().__init__(master, **kwargs)
         self.rows = rows
         self.columns = columns
@@ -13,21 +13,27 @@ class ClickableGridFrame(customtkinter.CTkFrame):
 
         self.selected_cell = None
         self.toggled_cells = set()
+        self.grid_offset = grid_offset
+        self.should_draw_lines = True
 
     def on_click(self, event):
         cell_width = self.canvas.winfo_width() / self.columns
         cell_height = self.canvas.winfo_height() / self.rows
 
-        column = int(event.x // cell_width)
-        row = int(event.y // cell_height)
-        print(f"Clicked {column=}, {row=}")
+        c = int(event.x // cell_width)
+        r = int(event.y // cell_height)
 
-        self.selected_cell = (column, row)
+        col = c + self.grid_offset
+        row = r + self.grid_offset
 
-        if (column, row) in self.toggled_cells:
-            self.toggled_cells.remove((column, row))
+        # print(f"Clicked {col=}, {row=}")
+
+        self.selected_cell = (col, row)
+
+        if self.selected_cell in self.toggled_cells:
+            self.toggled_cells.remove(self.selected_cell)
         else:
-            self.toggled_cells.add((column, row))
+            self.toggled_cells.add(self.selected_cell)
 
         self.draw_grid()
 
@@ -48,18 +54,13 @@ class ClickableGridFrame(customtkinter.CTkFrame):
                 y2 = y1 + cell_height
 
                 color = "white"
-                if (i, j) in self.toggled_cells:
+                if (i + self.grid_offset, j + self.grid_offset) in self.toggled_cells:
                     color = "black"
                 # if (i, j) == self.selected_cell:
                 #     color = "red"
-                self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline="black")
+                outline = "black" if self.should_draw_lines else color
+                self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline=outline)
 
-        # draw vertical lines
-        for i in range(1, self.columns):
-            x = i * width / self.columns
-            self.canvas.create_line(x, 0, x, height, fill="black")
-
-        # draw horizontal lines
-        for j in range(1, self.rows):
-            y = j * height / self.rows
-            self.canvas.create_line(0, y, width, y, fill="black")
+    def set_grid_offset(self, new_grid_offset):
+        self.grid_offset = new_grid_offset
+        self.draw_grid()
