@@ -5,7 +5,7 @@ class ZoomSelector(customtkinter.CTkFrame):
         super().__init__(master, **kwargs)
         if options is None:
             options = [10, 20, 30, 50, 80, 100, 150, 200]
-        self.label = customtkinter.CTkLabel(self, text="Powiększenie:")
+        self.label = customtkinter.CTkLabel(self, text="Visible part of board:")
         self.label.pack(side="left", padx=(5, 0))
 
         self.zoom_var = customtkinter.IntVar(value=default)
