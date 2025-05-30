@@ -1,6 +1,6 @@
 # game-of-life
 
-A simple, interactive application for simulating Conway’s "Game of Life", built in Python using CustomTkinter library.
+A simple app for simulating Conway’s "Game of Life", built in Python using CustomTkinter library.
 
 ## Features
 - Manually change states of cells
