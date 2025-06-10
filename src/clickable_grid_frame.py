@@ -1,6 +1,27 @@
 import customtkinter
 
 class ClickableGridFrame(customtkinter.CTkFrame):
+    '''
+        Clickable grid frame for Game of Life.
+        Allows the user to click cells and toggle their state between alive (green color) and dead (white color).
+
+        Attributes:
+            rows (int): number of rows in the grid
+            columns (int): number of columns in the grid
+            canvas (customtkinter.CTkCanvas)
+            selected_cell (tuple): currently selected cell
+            toggled_cells (set): set of cells that are currently alive
+            new_toggled_cells (set): set of live cells from the latest simulation update
+            grid_offset (int)
+            should_draw_lines (bool): can be set to False, if grid is large and hard to see
+            rect_ids (dict)
+
+        Methods:
+            on_click(event): Handles mouse events to toggle cells' states.
+            draw_grid(event=None):
+            update_grid()
+            set_grid_offset(new_grid_offset)
+    '''
     def __init__(self, master, grid_offset, rows, columns, **kwargs):
         super().__init__(master, width=800, height=800, **kwargs)
         self.rows = rows

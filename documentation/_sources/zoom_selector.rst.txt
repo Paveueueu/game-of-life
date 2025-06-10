@@ -1,0 +1,7 @@
+zoom\_selector module
+=====================
+
+.. automodule:: zoom_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,6 +1,19 @@
 ﻿import customtkinter
 
 class ZoomSelector(customtkinter.CTkFrame):
+    '''
+        Zoom selector allows user to change the visible part of the grid.
+
+        Attributes:
+            label (customtkinter.CTkLabel)
+            zoom_var (IntVar): current zoom level
+            combobox (customtkinter.CTkComboBox): zoom selector combobox
+
+        Methods:
+            get_zoom(): returns the currently selected zoom (board size)
+            get_max_zoom(): returns the maximum available zoom (board size)
+    '''
+
     def __init__(self, master=None, command=None, default=20, options=None, **kwargs):
         super().__init__(master, **kwargs)
         if options is None:

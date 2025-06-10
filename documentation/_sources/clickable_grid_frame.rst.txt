@@ -1,0 +1,7 @@
+clickable\_grid\_frame module
+=============================
+
+.. automodule:: clickable_grid_frame
+   :members:
+   :show-inheritance:
+   :undoc-members:

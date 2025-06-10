@@ -1,0 +1,7 @@
+checkbox\_grid module
+=====================
+
+.. automodule:: checkbox_grid
+   :members:
+   :show-inheritance:
+   :undoc-members:

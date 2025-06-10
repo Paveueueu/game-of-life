@@ -1,6 +1,19 @@
 ﻿import customtkinter
 
 class CheckboxGrid(customtkinter.CTkFrame):
+    '''
+        Grid of checkboxes for selecting rules.
+        Allows the user to set how many neighbors make a cell is born (Spawn rules)
+        and with how many neighbors a cell should die (Die rules).
+
+        Attributes:
+            checkboxes_spawn (list): list of checkboxes for spawn rules
+            checkboxes_die (list): list of checkboxes for die rules
+            labels (list): list of labels for the grid
+
+        Methods:
+            get_rules: returns lists of set spawn and die rules
+    '''
     def __init__(self, master=None, **kwargs):
         super().__init__(master, **kwargs)
         self.checkboxes_spawn = []
