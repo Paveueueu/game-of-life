@@ -1,7 +1,7 @@
-﻿from checkbox_grid import CheckboxGrid
-from clickable_grid_frame import *
-from zoom_selector import *
-import game_of_life
+﻿from src.checkbox_grid import *
+from src.clickable_grid_frame import *
+from src.zoom_selector import *
+import src.game_of_life as game_of_life
 
 
 class App(customtkinter.CTk):
